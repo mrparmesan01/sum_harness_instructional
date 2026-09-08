@@ -15,7 +15,7 @@ setup(int64_t N, int64_t A[])
    // printf("\n");
    std::srand(time(0));
    for(int64_t i = 0; i < N; i++) {
-      A[i] = rand() % N;
+      A[i] = i;
    }
 }
 

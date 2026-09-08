@@ -12,8 +12,8 @@ void
 setup(int64_t N, int64_t A[])
 {
    std::srand(time(0));
-   // printf(" inside sum_indirect problem_setup, N=%lld \n", N);
-   for(int64_t i = 0; i < N; i++) {
+   // printf("inside sum_indirect problem_setup, N=%lld \n", N);
+   for(int64_t i = 0; i < N-1; i++) {
       A[i] = rand() % N;
    }
 }

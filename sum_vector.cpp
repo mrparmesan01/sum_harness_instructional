@@ -13,8 +13,8 @@ setup(int64_t N, int64_t A[])
 {
    printf(" inside sum_vector problem_setup, N=%lld \n", N);
    std::srand(time(0));
-   for(int64_t i = 0; i < N; i++) {
-      A[i] = rand() % N;
+   for(int64_t i = 0; i < N-1; i++) {
+      A[i] = i;
    }
 }
 
