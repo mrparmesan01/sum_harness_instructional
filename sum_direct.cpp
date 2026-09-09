@@ -11,9 +11,7 @@
 void 
 setup(int64_t N, int64_t A[])
 {
-   // printf(" inside direct_sum problem_setup, N=%lld \n", N);
-   // printf("\n");
-   std::srand(time(0));
+   printf(" inside direct_sum problem_setup, N=%lld \n", N);
    for(int64_t i = 0; i < N; i++) {
       A[i] = i;
    }
@@ -22,7 +20,7 @@ setup(int64_t N, int64_t A[])
 int64_t
 sum(int64_t N, int64_t A[])
 {
-   // printf(" inside direct_sum perform_sum, N=%lld \n", N);
+   printf(" inside direct_sum perform_sum, N=%lld \n", N);
    int64_t total = 0;
    for(int64_t i = 0; i < N; i++) {
       total += A[i];
