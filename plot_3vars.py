@@ -20,7 +20,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-fname = "sample_data_3vars.csv"
+# fname = "sample_data_3vars.csv"
+fname = "submit_data2.csv"
 df = pd.read_csv(fname, comment="#")
 print(df)
 
@@ -36,33 +37,41 @@ code1_time = df[var_names[1]].values.tolist()
 code2_time = df[var_names[2]].values.tolist()
 code3_time = df[var_names[3]].values.tolist()
 
-plt.title("Comparison of 3 Codes")
+# Compute MFLOP/s from problem size (ops) and runtime (time)
+code1_mflops = [
+    (n / 1000000.0) / t if pd.notnull(t) and t > 0 else 0
+    for n, t in zip(problem_sizes, code1_time)
+]
+code2_mflops = [
+    (n / 1000000.0) / t if pd.notnull(t) and t > 0 else 0
+    for n, t in zip(problem_sizes, code2_time)
+]
+code3_mflops = [
+    (n / 1000000.0) / t if pd.notnull(t) and t > 0 else 0
+    for n, t in zip(problem_sizes, code3_time)
+]
+
+plt.title("Memory Access Performance (MFLOP/s)")
 
 xlocs = [i for i in range(len(problem_sizes))]
 
 plt.xticks(xlocs, problem_sizes)
 
-# here, we are plotting the raw values read from the input .csv file, which
-# we interpret as being "time" that maps directly to the y-axis.
-#
-# what if we want to plot MFLOPS instead? How do we compute MFLOPS from
-# time and problem size? You may need to add some code here to compute
-# MFLOPS, then modify the plt.plot() lines below to plot MFLOPS rather than time.
+# Plot the computed MFLOP/s values rather than time
+plt.plot(code1_mflops, "r-o")
+plt.plot(code2_mflops, "b-x")
+plt.plot(code3_mflops, "g-^")
 
-plt.plot(code1_time, "r-o")
-plt.plot(code2_time, "b-x")
-plt.plot(code3_time, "g-^")
-
-#plt.xscale("log")
-#plt.yscale("log")
+# plt.xscale("log")
+# plt.yscale("log")
 
 plt.xlabel("Problem Sizes")
-plt.ylabel("runtime")
+plt.ylabel("MFLOP/s")
 
 varNames = [var_names[1], var_names[2], var_names[3]]
 plt.legend(varNames, loc="best")
 
-plt.grid(axis='both')
+plt.grid(axis="both")
 
 plt.show()
 
